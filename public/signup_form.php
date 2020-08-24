@@ -1,8 +1,18 @@
 <?php
 session_start();
-require '../function.php'
+require '../function.php';
+require_once '../classes/UserLogic.php';
+
+// ログインしているか判定し、していなかったら新規登録画面へ返す
+$result = UserLogic::checkLogin();
+if($result){
+  header('Location: mypage.php');
+  return;
+}
 
 
+$login_err = isset($_SESSION['login_err']) ? $_SESSION['login_err'] : null;
+unset($_SESSION['login_err']);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -13,6 +23,9 @@ require '../function.php'
 </head>
 <body>
   <h2>ユーザー登録フォーム</h2>
+  <?php if (isset($login_err)) : ?>
+      <p><?php echo $login_err;?></p>
+    <?php endif; ?> 
     <form action="register.php" method="POST">
     <p>
       <label for="username">ユーザー名:</label>

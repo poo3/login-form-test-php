@@ -20,7 +20,7 @@ if (count($err) > 0){
 
   // $_SESSIONは連想配列で定義
   $_SESSION = $err;
-  header('Location: login.php');
+  header('Location: login_form.php');
   return;
 }
 
@@ -28,10 +28,9 @@ if (count($err) > 0){
 $result = UserLogic::login($email, $password);
 // ログイン失敗した時の処理
 if(!$result){
-  header('Location: login.php');
+  header('Location: login_form.php');
   return;
 }
-echo 'ログイン成功です';
 
 
 ?>
@@ -41,16 +40,12 @@ echo 'ログイン成功です';
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ユーザー登録完了画面</title>
+  <title>ログイン完了</title>
 </head>
 <body>
-<?php if (count($err) > 0):?>
-  <?php foreach($err as $e):?>
-    <p><?php echo $e ?></p>
-  <?php endforeach ?>
-<?php else : ?>
-  <p>ユーザ登録が完了しました</p>
-<?php endif ?>
-  <a href="./login.php">戻る</a>
+<h2>ログイン完了</h2>
+<p>ログインしました！</p>
+
+<a href="./mypage.php">マイページへ</a>
 </body>
 </html>
